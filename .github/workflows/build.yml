@@ -10,7 +10,7 @@ on:
     paths:
       - 'game/**'
       - 'assets/**'
-      - '.github/workflows/**'
+      - 'tools/**'
       - '.github/workflows/**'
   pull_request:
     branches: [ main ]
