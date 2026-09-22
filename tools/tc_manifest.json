@@ -1,0 +1,87 @@
+{
+  "manifest_version": "0.3",
+  "maintainer": "王码",
+  "date": "2024-11-19",
+  "task": "S10-05 全量挂接清单——runner 读此文件驱动 400 条 TC 分档挂接（v0.3 补 missing 段 + 400 全量口径）",
+  "total_cases": 400,
+  "summary": {
+    "A": 127,
+    "B": 41,
+    "C": 62,
+    "missing": 170,
+    "A_plus_B": 168,
+    "target_hook_rate_pct": 90,
+    "note": "400 全量口径（张策 D5 拍板不缩水）：精确 127 条 A/B/C 全登记 + missing 170 条散装回归（C 类手工登记在册）。A+B ≥90% 达标 = 精确 A/B 全挂 + 散装可脚本部分复用执行体；C 类手工单列不占 15min"
+  },
+  "missing": {
+    "note": "170 条差额 = 散装回归执行条次（无独立 TC 编号，Sprint 9 报告 P1 150 + P2/P3 散装部分），非漏登 A/B 类",
+    "entries": [
+      {"prefix": "REG-P1-存量", "tier": "C", "hook": false, "count": 150, "exec": "manual", "note": "V1.2 存量回归（剧情体验/界面流程为主，~40 可脚本复用）"},
+      {"prefix": "REG-P23-散装", "tier": "C", "hook": false, "count": 20, "exec": "manual", "note": "UI 细节/多语言/性能散装执行条次（~20 可脚本）"}
+    ],
+    "sum": 170
+  },
+  "groups": {
+    "P0": {
+      "desc": "冒烟+战斗/H（PC 主线程 + Android 分片）",
+      "entries": [
+        {"prefix": "TC-SMOKE-001~010", "tier": "A", "hook": true, "count": 10, "exec": "smoke"},
+        {"prefix": "TC-SMOKE-011~018", "tier": "B", "hook": true, "count": 8, "exec": "asset_3d"},
+        {"prefix": "TC-SMOKE-019", "tier": "B", "hook": true, "count": 1, "exec": "manifest_check"},
+        {"prefix": "TC-SMOKE-020", "tier": "A", "hook": true, "count": 1, "exec": "smoke"},
+        {"prefix": "TC-BATTLE-001~010", "tier": "A", "hook": true, "count": 10, "exec": "gd:test_battle_system"},
+        {"prefix": "TC-H-001~010", "tier": "A", "hook": true, "count": 10, "exec": "gd:test_event_manager"},
+        {"prefix": "TC-CH5-001~008", "tier": "A", "hook": true, "count": 8, "exec": "gd:test_ch5_boss"},
+        {"prefix": "TC-BOSS-001~005", "tier": "A", "hook": true, "count": 5, "exec": "gd:test_ch5_boss"}
+      ]
+    },
+    "P1": {
+      "desc": "存档/UI/音频（PC 2 线程）",
+      "entries": [
+        {"prefix": "TC-SAVE-001~023", "tier": "A", "hook": true, "count": 23, "exec": "gd:test_save_portrait"},
+        {"prefix": "TC-SAVE-MIG-001~008", "tier": "C", "hook": false, "count": 8, "exec": "manual"},
+        {"prefix": "TC-UI-001~006", "tier": "A", "hook": true, "count": 6, "exec": "gd:test_ui_state"},
+        {"prefix": "TC-UI-014~018", "tier": "C", "hook": false, "count": 5, "exec": "manual"},
+        {"prefix": "TC-AUDIO-001~005", "tier": "A", "hook": true, "count": 5, "exec": "file_check:audio"},
+        {"prefix": "TC-AUDIO-听感", "tier": "C", "hook": false, "count": 2, "exec": "manual"}
+      ]
+    },
+    "P2": {
+      "desc": "3D/边界/性能/画廊（PC 3 线程）",
+      "entries": [
+        {"prefix": "TC-3D-001~008", "tier": "B", "hook": true, "count": 8, "exec": "asset_3d"},
+        {"prefix": "TC-BOUND-001~010", "tier": "A", "hook": true, "count": 10, "exec": "gd:test_add_stat"},
+        {"prefix": "TC-PERF-001~010", "tier": "A", "hook": true, "count": 10, "exec": "benchmark"},
+        {"prefix": "TC-PERF-011~015", "tier": "C", "hook": false, "count": 5, "exec": "manual"},
+        {"prefix": "TC-GALLERY-001~018", "tier": "B", "hook": true, "count": 18, "exec": "gallery_check"},
+        {"prefix": "TC-GALLERY-019~020", "tier": "C", "hook": false, "count": 2, "exec": "manual"},
+        {"prefix": "TC-V12-存量", "tier": "MIX", "hook": true, "count": 15, "exec": "mixed"}
+      ]
+    },
+    "P3": {
+      "desc": "兼容/跨版本/云存档/脚本类（Android + 多配置）",
+      "entries": [
+        {"prefix": "TC-COMPAT-001~010", "tier": "C", "hook": false, "count": 10, "exec": "manual"},
+        {"prefix": "TC-SUB-001~018", "tier": "C", "hook": false, "count": 18, "exec": "manual"},
+        {"prefix": "TC-LINT-001~012", "tier": "A", "hook": true, "count": 12, "exec": "lint"},
+        {"prefix": "TC-VOICE-下载", "tier": "A", "hook": true, "count": 8, "exec": "file_check:voice"},
+        {"prefix": "TC-VOICE-听感", "tier": "C", "hook": false, "count": 2, "exec": "manual"},
+        {"prefix": "TC-STORE-001~005", "tier": "C", "hook": false, "count": 5, "exec": "manual"},
+        {"prefix": "TC-CLOUD-001~005", "tier": "C", "hook": false, "count": 5, "exec": "manual"}
+      ]
+    }
+  },
+  "gallery_assert": {
+    "script": "tools/check_gallery.py",
+    "slots": 18,
+    "checks": ["exists", "non_empty", "riff", "webp_magic", "size_ok"],
+    "max_webp_bytes": 1258291,
+    "strict_required": true,
+    "note": "四连断言：① 文件存在（LFS pull 后）② 非空（排除 96B 指针）③ WebP 头 RIFF....WEBP ④ 体积 <1.2MB；CI 验收必须 --strict（陈验红线）"
+  },
+  "changelog": [
+    "2024-11-19：v0.1 落盘（王码）——A/B/C 三档总表 + 四组挂接明细 + gallery 断言配置，对齐映射表 v0.2",
+    "2024-11-19：v0.2 补 count + exec 机器可读列（王码）——每 entry 精确条数 + 执行体命令，runner 清单驱动前置；gallery_assert 补 strict_required 红线",
+    "2024-11-19：v0.3 补 missing 段 + 400 全量口径（王码，张策 D5 拦截后修正）——170 条差额登记在册（散装回归 C 类），summary 改 400 口径，不再缩水报数"
+  ]
+}

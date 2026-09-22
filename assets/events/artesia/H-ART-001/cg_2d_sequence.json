@@ -1,0 +1,68 @@
+{
+  "event_id": "H-ART-001",
+  "duration_ms": 45000,
+  "platform": "ANDROID_ONLY",
+  "fallback_to_3d": false,
+  "sequence": [
+    {
+      "scene_id": 1,
+      "file": "assets/cg_2d/artesia/H-ART-001_01.png",
+      "duration_ms": 8000,
+      "camera": "static",
+      "zoom": "1.0",
+      "fade_in_ms": 800,
+      "fade_out_ms": 500,
+      "description": "深夜书房，Artesia 女仆立姿站主角身侧"
+    },
+    {
+      "scene_id": 2,
+      "file": "assets/cg_2d/artesia/H-ART-001_02.png",
+      "duration_ms": 8000,
+      "camera": "zoom_in",
+      "zoom": "1.2",
+      "fade_in_ms": 500,
+      "fade_out_ms": 500,
+      "description": "契约羊皮卷展开，主角签字，Artesia 手放卷上"
+    },
+    {
+      "scene_id": 3,
+      "file": "assets/cg_2d/artesia/H-ART-001_03.png",
+      "duration_ms": 8000,
+      "camera": "shake",
+      "shake_intensity": 0.1,
+      "fade_in_ms": 500,
+      "fade_out_ms": 500,
+      "description": "卧室床前，Artesia 跪坐主动拉主角"
+    },
+    {
+      "scene_id": 4,
+      "file": "assets/cg_2d/artesia/H-ART-001_04.png",
+      "duration_ms": 12000,
+      "camera": "zoom_in",
+      "zoom": "1.3",
+      "fade_in_ms": 500,
+      "fade_out_ms": 800,
+      "description": "契约金光在两人之间闪，交缠场景"
+    },
+    {
+      "scene_id": 5,
+      "file": "assets/cg_2d/artesia/H-ART-001_05.png",
+      "duration_ms": 9000,
+      "camera": "fade_out",
+      "fade_in_ms": 500,
+      "fade_out_ms": 1500,
+      "description": "次晨，阳光透窗帘，Artesia 侧卧依偎主角"
+    }
+  ],
+  "bgm": "assets/audio/bgm/theme_contract.ogg",
+  "bgm_volume": 0.6,
+  "voice_dir": "assets/events/artesia/H-ART-001/audio/se/",
+  "skip_confirm": {
+    "enabled": true,
+    "long_press_ms": 500,
+    "confirm_text": "确定跳过契约？契约一旦跳过无法补回。",
+    "allow_skip": false
+  },
+  "android_safe": false,
+  "budget_cg": 500
+}

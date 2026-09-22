@@ -1,0 +1,182 @@
+# CI 配置：GitHub Actions 双平台构建
+# 维护人：王码
+# 版本：v0.1（D2 Android 骨架）
+
+name: build
+
+on:
+  push:
+    branches: [ main, dev ]
+    paths:
+      - 'game/**'
+      - 'assets/**'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  unit-test:
+    name: Unit Test (headless) [${{ matrix.group }} shard ${{ matrix.shard }}]
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [P0, P1, P2, P3]
+        shard: [1/2, 2/2]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Git LFS pull (TC-GALLERY 前置，拉取 CG webp 真体)
+        run: |
+          git lfs pull
+          # 指针残留自检：LFS 对象未 push 完整时直接 fail（李游钉的坑——指针文件 <1KB，file_exists 假绿）
+          # 红在源头而非 TC-GALLERY 跑出不明不白的红：体积 <1KB 的一刀切排除
+          found=$(find assets/cg_2d -name "*.webp" -size -1k -print)
+          if [ -n "$found" ]; then
+            echo "::error::LFS 指针残留（<1KB），CG webp 未拉取真体："
+            echo "$found"
+            exit 1
+          fi
+      - name: Download Godot 4.3 headless
+        run: |
+          curl -o godot.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+          unzip godot.zip
+          chmod +x Godot_v4.3-stable_linux.x86_64
+      - name: Run unit tests (group ${{ matrix.group }} shard ${{ matrix.shard }})
+        run: |
+          export GODOT_BIN="$PWD/Godot_v4.3-stable_linux.x86_64"
+          python3 tools/test_runner.py --group ${{ matrix.group }} --shard ${{ matrix.shard }} --json "out/${{ matrix.group }}_${{ matrix.shard }}.json"
+      - name: Upload shard results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-results-${{ matrix.group }}-${{ matrix.shard }}
+          path: out/${{ matrix.group }}_${{ matrix.shard }}.json
+
+  gallery-check:
+    name: TC-GALLERY (check_gallery --strict)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Git LFS pull (CG webp 真体)
+        run: |
+          git lfs pull
+          found=$(find assets/cg_2d -name "*.webp" -size -1k -print)
+          if [ -n "$found" ]; then
+            echo "::error::LFS 指针残留（<1KB），CG webp 未拉取真体："
+            echo "$found"
+            exit 1
+          fi
+      - name: Run TC-GALLERY-001~018 四连断言 (--strict 门禁)
+        run: |
+          python3 tools/check_gallery.py --strict --json out/gallery.json
+      - name: Upload gallery results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-results-gallery
+          path: out/gallery.json
+
+  unit-aggregate:
+    name: Aggregate unit test results
+    runs-on: ubuntu-latest
+    needs: unit-test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: out/
+          pattern: unit-results-*
+          merge-multiple: true
+      - name: Merge shard results
+        run: |
+          # 统一调用 aggregate_results.py（单一实现，避免与本地验证漂移）
+          # D5 前统一：PM 抽查隐患 R-D4-01 处理
+          python3 tools/aggregate_results.py --input out/ --output out/aggregate.json
+      - name: Upload aggregate
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-aggregate
+          path: out/aggregate.json
+
+  build-windows:
+    name: Build Windows x86_64
+    runs-on: windows-latest
+    needs: unit-test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Git LFS pull (Windows 导出需素材真体)
+        run: git lfs pull
+      - name: Download Godot 4.3 Windows headless
+        run: |
+          curl -o godot.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_win64.zip
+          tar -xf godot.zip
+          Move-Item Godot_v4.3-stable_win64.exe godot.exe
+      - name: Export Windows
+        run: ./godot.exe --headless --path game --export-release "Windows Desktop" "build/windows/ArkaFall.exe"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arka-fall-windows-v0.2.0
+          path: game/build/windows/*.exe
+
+  build-android:
+    name: Build Android APK (ARM64)
+    runs-on: ubuntu-latest
+    needs: unit-test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Git LFS pull (Android APK 导出需素材真体)
+        run: git lfs pull
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Download Godot 4.3 Linux headless
+        run: |
+          curl -o godot.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+          unzip godot.zip
+          chmod +x Godot_v4.3-stable_linux.x86_64
+      - name: Download Android export templates
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates/4.3.stable
+          curl -o templates.zip https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_export_templates.tpz
+          unzip templates.zip -d ~/.local/share/godot/export_templates/4.3.stable
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+      - name: Export Android APK
+        env:
+          ANDROID_SDK_ROOT: ${{ github.workspace }}/.android-sdk
+          GODOT_EXPORT_PATH: ${{ github.workspace }}/game/build/android/ArkaFall.apk
+        run: |
+          # 签名密钥通过 secrets 提供
+          ./Godot_v4.3-stable_linux.x86_64 --headless --path game --export-release "Android" "$GODOT_EXPORT_PATH"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arka-fall-android-v0.2.0
+          path: game/build/android/*.apk
+
+  build-web:
+    name: Build Web
+    runs-on: ubuntu-latest
+    needs: unit-test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Git LFS pull (Web 导出需素材真体)
+        run: git lfs pull
+      - name: Download Godot 4.3 Linux headless
+        run: |
+          curl -o godot.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+          unzip godot.zip
+          chmod +x Godot_v4.3-stable_linux.x86_64
+      - name: Download Web export templates
+        run: |
+          mkdir -p ~/.local/share/godot/export_templates/4.3.stable
+          curl -o templates.zip https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_export_templates.tpz
+          unzip templates.zip -d ~/.local/share/godot/export_templates/4.3.stable
+      - name: Export Web
+        run: ./Godot_v4.3-stable_linux.x86_64 --headless --path game --export-release "Web" "game/build/web/index.html"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: arka-fall-web-v0.2.0
+          path: game/build/web/

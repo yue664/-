@@ -1,0 +1,33 @@
+{
+  "id": "H-ART-001",
+  "title": "初夜·契约确认",
+  "tier": "T0",
+  "char_id": "artesia",
+  "char_name": "Artesia（契约女仆）",
+  "chapter": "第一章 · 堕落之初",
+  "contract_delta": 25,
+  "corruption_delta": 10,
+  "ending_branch": "art_contract_line",
+  "requires": {
+    "contract_min": 0,
+    "affection_min": 50,
+    "corruption_min": 0
+  },
+  "skip_allowed": false,
+  "android_safe": false,
+  "scene_3d": "assets/events/artesia/H-ART-001/scene_3d.tscn",
+  "cg_2d_sequence": "assets/events/artesia/H-ART-001/cg_2d_sequence.json",
+  "dialog": "assets/events/artesia/H-ART-001/dialog.json",
+  "audio_dir": "assets/events/artesia/H-ART-001/audio/",
+  "scene_count_steam": 5,
+  "scene_count_android": 5,
+  "cg_count_android": 5,
+  "choices_count": 3,
+  "voice_count_estimate": 24,
+  "duration_hint_ms": 45000,
+  "unlocks": ["H-ART-002", "H-ART-003", "H-ART-004"],
+  "linked_risk": "R-017",
+  "priority": "MUST",
+  "budget_cg": 500,
+  "notes": "标杆事件模板，其他 H 事件照此结构产出"
+}

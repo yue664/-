@@ -1,0 +1,121 @@
+{
+  "manifest_version": "0.2",
+  "project": "阿爾卡迪亞墮落者們",
+  "engine": "Godot 4.3",
+  "platforms": ["STEAM_PC", "ANDROID"],
+  "last_updated": "2024-09-09",
+  "maintainer": "赵画",
+  "notes": "Android 侧 2D CG 素材缺口登记 R-016，预算 15,500 元待批",
+
+  "folders": {
+    "assets/tiles": {
+      "purpose": "2D 像素 tile（战斗/场景）",
+      "dual_track": true,
+      "spec": {"format": "png", "size": "32x32", "compression": "WebP quality=80"},
+      "fallback": "assets/tiles/placeholder.png",
+      "count": 24
+    },
+    "assets/portraits": {
+      "purpose": "2D 立绘（对话/事件展示，双平台共用）",
+      "dual_track": true,
+      "spec": {"format": "png", "size": "1080x1920", "compression": "WebP quality=85"},
+      "fallback": "assets/portraits/placeholder.png",
+      "count": 5
+    },
+    "assets/portraits_expressions": {
+      "purpose": "2D 立绘表情差分（Android 专用，双平台可选）",
+      "dual_track": true,
+      "spec": {"format": "png", "size": "1080x1920", "compression": "WebP quality=85"},
+      "fallback": "assets/portraits/{char_id}.png",
+      "count": 20,
+      "expressions": ["neutral", "mouth_open", "sigh_blush", "tear_cry"],
+      "linked_risk": "R-016"
+    },
+    "assets/cg_2d": {
+      "purpose": "2D CG 分镜（Android H 事件专用，Steam 无）",
+      "dual_track": "ANDROID_ONLY",
+      "spec": {"format": "png", "size": "1920x1080", "compression": "WebP quality=88"},
+      "fallback": null,
+      "count": 85,
+      "tier": {
+        "T0_main": {"count": 25, "priority": "MUST", "budget": 12500},
+        "T1_first_batch": {"count": 6, "priority": "Sprint4前", "budget": 3000},
+        "T1_second_batch": {"count": 54, "priority": "V5+", "budget": 27000}
+      },
+      "linked_risk": "R-016"
+    },
+    "assets/models/heroines": {
+      "purpose": "3D 立绘模型（Steam 完整版）",
+      "dual_track": "STEAM_PC_MAIN",
+      "spec": {
+        "format": "gltf",
+        "face_count": {"STEAM_PC": "10000-20000", "ANDROID_LOD": "3000-5000"},
+        "blend_shapes": 8,
+        "rig": "Mixamo / VRM",
+        "shader": "CelShading_V2"
+      },
+      "fallback": null,
+      "count": 10,
+      "characters": ["Artesia", "Marina", "Mei", "Rushena", "Meido"],
+      "linked_risk": "R-014"
+    },
+    "assets/models/hero": {
+      "purpose": "3D 主角模型（凯尔）",
+      "dual_track": "STEAM_PC_MAIN",
+      "spec": {
+        "format": "gltf",
+        "face_count": {"STEAM_PC": "8000-15000", "ANDROID_LOD": "3000-5000"},
+        "blend_shapes": 5,
+        "rig": "Mixamo"
+      },
+      "count": 2,
+      "linked_risk": "R-014"
+    },
+    "assets/shaders": {
+      "purpose": "Shader 源文件",
+      "dual_track": true,
+      "spec": {"format": "gdshader"},
+      "count": 4
+    },
+    "assets/audio/bgm": {
+      "purpose": "背景音乐（双平台共用）",
+      "dual_track": true,
+      "spec": {"format": "ogg", "bitrate": 128, "duration_min": 3},
+      "count": 12
+    },
+    "assets/audio/se": {
+      "purpose": "音效（双平台共用）",
+      "dual_track": true,
+      "spec": {"format": "ogg", "bitrate": 96},
+      "count": 40
+    },
+    "assets/ui": {
+      "purpose": "UI 底图/边框/图标（鼠标 vs 触控双轨）",
+      "dual_track": "MOUSE_VS_TOUCH",
+      "spec": {"format": "png", "compression": "WebP quality=85"},
+      "count": 60,
+      "variants": {"mouse": 30, "touch": 30}
+    },
+    "assets/events": {
+      "purpose": "H 事件资源（双平台分场景，剧本/语音共用）",
+      "dual_track": "HYBRID",
+      "structure": "assets/events/{char_id}/{event_id}/{scene_3d.tscn|cg_2d_sequence.json|dialog.json|audio/|meta.json}",
+      "count": 25,
+      "linked_risk": "R-017"
+    }
+  },
+
+  "loading": {
+    "max_asset_size_mb": 200,
+    "texture_compression": "WebP",
+    "load_timeout_ms": 800,
+    "fallback_enabled": true
+  },
+
+  "budget": {
+    "V4_3_android": {"amount": 4000, "approved": true, "note": "3D LOD 5000 面 + 触控 UI"},
+    "V4_3_android_cg": {"amount": 15500, "approved": false, "note": "2D CG T0 全 25 张 + T1 首批 6 张，待张策批", "linked_risk": "R-016"},
+    "web_cdn": {"amount": 2000, "approved": false, "note": "官网+CDN，R-013 应对，待张策批"},
+    "total_pending": 17500
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "event_id": "H-MEI-001",
+  "title": "血之初次",
+  "tier": "T0",
+  "chapter": "第 3 章 · 血脉初动",
+  "char_id": "mei",
+  "duration_hint_ms": 48000,
+  "requires": {
+    "contract_min": 0,
+    "affection_min": 50,
+    "corruption_min": 15
+  },
+  "effect": {
+    "contract_delta": 25,
+    "corruption_delta": 10,
+    "flags": ["seen_mei_first", "mei_contract_signed", "mei_blood_first"]
+  },
+  "skip_allowed": false,
+  "android_safe": false,
+
+  "scenes": [
+    {
+      "scene_id": 1,
+      "location": "古堡晚宴 · 长桌尽头",
+      "time_of_day": "深夜（永夜）",
+      "camera_steam": "3D 内景：烛火摇曳，长桌尽头 Mei 独坐，深红丝绒夜礼服，颈侧有干涸血痕；主角从宴会厅走近，她抬眼",
+      "cg_android": "H-MEI-001_01.png",
+      "bgm": "assets/audio/bgm/theme_cathedral_night.ogg",
+      "dialog": [
+        {"speaker": "旁白", "text": "烛火把 Mei 的影子拉长在墙。她颈侧，一抹干涸的血痕，像勋章。"},
+        {"speaker": "Mei", "expression": "smile", "text": "……勇者。你终于……走到这一步了。"},
+        {"speaker": "凯尔", "expression": "surprised", "text": "……你颈侧的血……这是？"},
+        {"speaker": "Mei", "expression": "neutral", "text": "……是上一个。他跪下来求的时候，我让他咬了一口。"},
+        {"speaker": "Mei", "expression": "smile", "text": "……他撑不过天亮。你……撑得过吗？"},
+        {"speaker": "旁白", "text": "烛火闪了一下。Mei 的眼神冷得像深井。"}
+      ]
+    },
+    {
+      "scene_id": 2,
+      "location": "古堡塔楼 · 月光下",
+      "time_of_day": "深夜（无月，只见古堡外冷光）",
+      "camera_steam": "3D 特写：Mei 从背后环住主角脖颈，尖牙抵在颈动脉上；月光透过落地窗投在她睫毛上，她瞳孔泛着猩红",
+      "cg_android": "H-MEI-001_02.png",
+      "bgm": "assets/audio/bgm/theme_vampire_rise.ogg",
+      "dialog": [
+        {"speaker": "Mei", "expression": "pleasure", "text": "……别动。让我试试。"},
+        {"speaker": "凯尔", "expression": "surprised", "text": "……你的牙……"},
+        {"speaker": "Mei", "expression": "mouth_open", "text": "……乖。别闭眼。"},
+        {"speaker": "旁白", "text": "两滴血从主角颈侧渗出，被 Mei 的舌尖卷走。她的瞳孔由黑转红。"},
+        {"speaker": "Mei", "expression": "pleasure", "text": "……你的血，比我吃过的一切都好喝。"}
+      ]
+    },
+    {
+      "scene_id": 3,
+      "location": "古堡塔楼 · 血液交换",
+      "time_of_day": "深夜（塔楼内蜡烛只剩一支）",
+      "camera_steam": "3D 演出：Mei 咬破自己手腕，把手腕贴到主角唇边；红色契约金文在两人之间浮现（血与血交融）",
+      "cg_android": "H-MEI-001_03.png",
+      "bgm": "assets/audio/bgm/theme_contract_blood.ogg",
+      "dialog": [
+        {"speaker": "Mei", "expression": "smile", "text": "……我也给你一口。血之交换，才算契约。"},
+        {"speaker": "凯尔", "expression": "surprised", "text": "……你的血，是甜的。"},
+        {"speaker": "Mei", "expression": "blush", "text": "……那当然。我活了七百年，喝过的血里，你的……特别干净。"},
+        {"speaker": "Mei", "expression": "pleasure", "text": "……签下契约吧。永夜将属于我们两个。"},
+        {"speaker": "系统", "text": "【选项 1】签下契约（契约度+25，堕落值+10）", "choice": 1},
+        {"speaker": "系统", "text": "【选项 2】要求缓一缓（好感度+5，本事件延后）", "choice": 2},
+        {"speaker": "系统", "text": "【选项 3】推开她（好感度-10，本事件永久关闭）", "choice": 3}
+      ]
+    },
+    {
+      "scene_id": 4,
+      "location": "古堡塔楼 · 契约成立后",
+      "time_of_day": "深夜（黎明将至）",
+      "camera_steam": "3D 演出：Mei 依偎主角胸口，红色契约金文在她胸口浮现并逐渐与主角胸口的融合；黎明前的最后一缕光从窗缝渗入",
+      "cg_android": "H-MEI-001_04.png",
+      "bgm": "assets/audio/bgm/theme_aftermath_eternal.ogg",
+      "dialog": [
+        {"speaker": "Mei", "expression": "sigh_blush", "text": "……你的心跳，慢了半拍。"},
+        {"speaker": "旁白", "text": "红色契约金文在两人胸口共鸣，像两颗同源的心脏。"},
+        {"speaker": "Mei", "expression": "smile", "text": "……从今夜起，你也是永夜之种。"},
+        {"speaker": "系统", "choice_result": 1, "text": "【契约度 +25 → 25｜堕落值 +10 → 15】"},
+        {"speaker": "系统", "choice_result": 2, "text": "（事件延后，好感度+5）"},
+        {"speaker": "系统", "choice_result": 3, "text": "（事件关闭，好感度-10，Mei 永久拒绝主角）"},
+        {"speaker": "系统", "text": "【H-MEI-001 完成｜解锁 H-MEI-002/003/004】"},
+        {"speaker": "系统", "text": "【主线分支：Mei 永夜契约线开启】"}
+      ]
+    }
+  ],
+
+  "choices": {
+    "1": {
+      "label": "签下契约",
+      "contract_delta": 25,
+      "affection_delta": 0,
+      "corruption_delta": 10,
+      "unlocks": ["H-MEI-002", "H-MEI-003", "H-MEI-004"],
+      "flag": "mei_contract_signed"
+    },
+    "2": {
+      "label": "要求缓一缓",
+      "contract_delta": 0,
+      "affection_delta": 5,
+      "corruption_delta": 0,
+      "unlocks": [],
+      "flag": "mei_contract_delayed"
+    },
+    "3": {
+      "label": "推开她",
+      "contract_delta": 0,
+      "affection_delta": -10,
+      "corruption_delta": 0,
+      "unlocks": [],
+      "flag": "mei_contract_rejected",
+      "permanent_close": true
+    }
+  },
+
+  "voice": {
+    "Mei": "zh-CN-XiaohanNeural",
+    "凯尔": "zh-CN-YunjianNeural",
+    "bgm": [
+      "assets/audio/bgm/theme_cathedral_night.ogg",
+      "assets/audio/bgm/theme_vampire_rise.ogg",
+      "assets/audio/bgm/theme_contract_blood.ogg",
+      "assets/audio/bgm/theme_aftermath_eternal.ogg"
+    ],
+    "se": "assets/events/mei/H-MEI-001/audio/se/"
+  },
+
+  "tts_defaults": {
+    "Mei_smile": {"pitch": "+1Hz", "rate": "+5%", "volume": "+5%"},
+    "Mei_neutral": {"pitch": "-1Hz", "rate": "-5%", "volume": "-5%"},
+    "Mei_blush": {"pitch": "+2Hz", "rate": "-10%", "volume": "-10%"},
+    "Mei_pleasure": {"pitch": "+4Hz", "rate": "-20%", "volume": "+10%"},
+    "Mei_mouth_open": {"pitch": "+4Hz", "rate": "-25%", "volume": "+5%"},
+    "Mei_sigh_blush": {"pitch": "+1Hz", "rate": "-15%", "volume": "-15%"},
+    "凯尔_surprised": {"pitch": "+3Hz", "rate": "+15%", "volume": "+10%"}
+  }
+}

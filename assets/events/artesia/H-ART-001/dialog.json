@@ -1,0 +1,110 @@
+{
+  "event_id": "H-ART-001",
+  "title": "初夜·契约确认",
+  "tier": "T0",
+  "chapter": "第 1 章 · 堕落之初",
+  "char_id": "artesia",
+  "duration_hint_ms": 45000,
+  "requires": {
+    "contract_min": 0,
+    "affection_min": 50,
+    "corruption_min": 0
+  },
+  "effect": {
+    "contract_delta": 25,
+    "corruption_delta": 10,
+    "flags": ["seen_artesia_first"]
+  },
+  "skip_allowed": false,
+  "android_safe": false,
+
+  "scenes": [
+    {
+      "scene_id": 1,
+      "location": "主角宅邸·书房",
+      "time_of_day": "深夜",
+      "camera_steam": "3D 内景，主角坐姿，Artesia 女仆立姿，镜头从主角脸推到双人近景",
+      "cg_android": "H-ART-001_01.png",
+      "dialog": [
+        {"speaker": "Artesia", "expression": "neutral", "text": "主人，深夜书房留灯，是还在看救国的典籍吗？"},
+        {"speaker": "凯尔", "expression": "smile", "text": "……你怎么还没休息。"},
+        {"speaker": "Artesia", "expression": "smile", "text": "主人的契约未签，阿特西亚睡不着。"},
+        {"speaker": "旁白", "text": "她把灯芯拨亮，女仆裙摆扫过地毯。"},
+        {"speaker": "Artesia", "expression": "blush", "text": "……如果签下契约，阿特西亚就不再是仆人，而是您的一部分。"},
+        {"speaker": "凯尔", "expression": "surprised", "text": "……阿特西亚，你确定？一旦签下，就没有回头路。"},
+        {"speaker": "Artesia", "expression": "pleasure", "text": "阿特西亚……想成为您的。"},
+        {"speaker": "系统", "text": "【选项 1】签下契约（契约度+25，堕落值+10）", "choice": 1},
+        {"speaker": "系统", "text": "【选项 2】再等等（好感度+5，本事件延后）", "choice": 2},
+        {"speaker": "系统", "text": "【选项 3】拒绝（好感度-10，本事件永久关闭）", "choice": 3}
+      ]
+    },
+    {
+      "scene_id": 2,
+      "location": "主角宅邸·书房",
+      "time_of_day": "深夜",
+      "camera_steam": "3D 特写：契约羊皮卷展开，主角签字；Artesia 手放卷上，眼波流转",
+      "cg_android": "H-ART-001_02.png",
+      "dialog": [
+        {"speaker": "Artesia", "expression": "pleasure", "text": "……签吧。阿特西亚的心，就交给您了。"},
+        {"speaker": "旁白", "text": "主角拿起银笔，在契约上签下真名。羊皮卷泛起金光。"},
+        {"speaker": "Artesia", "expression": "blush", "text": "……契约成立。从今夜起，阿特西亚是您所有。"},
+        {"speaker": "Artesia", "expression": "mouth_open", "text": "……主人……"},
+        {"speaker": "系统", "choice_result": 1, "text": "【契约度 +25 → 25｜堕落值 +10 → 10】"}
+      ]
+    },
+    {
+      "scene_id": 3,
+      "location": "主角宅邸·主卧室",
+      "time_of_day": "深夜",
+      "camera_steam": "3D 演出：Artesia 跪坐在床前，主动伸手拉主角上床；镜头切主角视角",
+      "cg_android": "H-ART-001_03.png",
+      "dialog": [
+        {"speaker": "Artesia", "expression": "pleasure", "text": "……主人，契约既立，阿特西亚就……伺候您就寝。"},
+        {"speaker": "凯尔", "expression": "surprised", "text": "……阿特西亚。"},
+        {"speaker": "Artesia", "expression": "blush", "text": "别躲……这是契约的一部分。"},
+        {"speaker": "旁白", "text": "她跪坐的膝头压弯了床单。烛光在她颈侧留下影子。"},
+        {"speaker": "Artesia", "expression": "mouth_open", "text": "……主人……请……"}
+      ]
+    },
+    {
+      "scene_id": 4,
+      "location": "主角宅邸·主卧室",
+      "time_of_day": "深夜",
+      "camera_steam": "3D 特写：主角与 Artesia 交缠，Blend Shape 交替切换 pleasure/sigh",
+      "cg_android": "H-ART-001_04.png",
+      "dialog": [
+        {"speaker": "Artesia", "expression": "pleasure", "text": "……嗯……主人……"},
+        {"speaker": "旁白", "text": "契约的金光在两人之间闪了一下，随即散进夜色。"},
+        {"speaker": "Artesia", "expression": "sigh_blush", "text": "……阿特西亚……终于……"},
+        {"speaker": "系统", "choice_result": 2, "text": "（事件延后，好感度+5）"},
+        {"speaker": "系统", "choice_result": 3, "text": "（事件关闭，好感度-10，本分支永久不可触发）"}
+      ]
+    },
+    {
+      "scene_id": 5,
+      "location": "主角宅邸·主卧室（次晨）",
+      "time_of_day": "清晨",
+      "camera_steam": "3D 演出：阳光透窗帘，Artesia 侧卧依偎主角，微笑闭眼",
+      "cg_android": "H-ART-001_05.png",
+      "dialog": [
+        {"speaker": "Artesia", "expression": "smile", "text": "……主人醒了。"},
+        {"speaker": "旁白", "text": "契约既立，堕落的种子就已落下。"},
+        {"speaker": "系统", "text": "【H-ART-001 完成｜契约度+25｜堕落值+10｜解锁 H-ART-002/003/004】"},
+        {"speaker": "系统", "text": "【主线分支：Artesia 契约线开启】"}
+      ]
+    }
+  ],
+
+  "choices": {
+    "1": {"label": "签下契约", "contract_delta": 25, "affection_delta": 0, "corruption_delta": 10, "unlocks": ["H-ART-002", "H-ART-003", "H-ART-004"], "flag": "art_contract_signed"},
+    "2": {"label": "再等等", "contract_delta": 0, "affection_delta": 5, "corruption_delta": 0, "unlocks": [], "flag": "art_contract_delayed"},
+    "3": {"label": "拒绝", "contract_delta": 0, "affection_delta": -10, "corruption_delta": 0, "unlocks": [], "flag": "art_contract_rejected", "permanent_close": true}
+  },
+
+  "voice": {
+    "Artesia": "assets/events/artesia/H-ART-001/audio/se/voices_artesia.ogg",
+    "凯尔": "assets/events/artesia/H-ART-001/audio/se/voices_kael.ogg",
+    "bgm": "assets/audio/bgm/theme_contract.ogg",
+    "se": "assets/events/artesia/H-ART-001/audio/se/"
+  }
+}

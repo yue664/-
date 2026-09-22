@@ -1,0 +1,80 @@
+# H-MA-001 剧本 JSON
+{
+  "event_id": "H-MA-001",
+  "title": "人鱼诱捕",
+  "version": "0.1",
+  "trigger": {
+    "main_chapter": 2,
+    "marina_contract": 40,
+    "corruption_max": 60
+  },
+  "shots": [
+    {
+      "shot": 1,
+      "scene": "coral_cave",
+      "duration_sec": 60,
+      "portrait_switch": "mar_normal",
+      "cg": "H-MA-001_cg1",
+      "lines": [
+        {"speaker": "marina", "voice": "nanami", "text": "……你来了"},
+        {"speaker": "marina", "voice": "nanami", "text": "我一直看着你"},
+        {"speaker": "marina", "voice": "nanami", "text": "……从你踏上这片海岸开始"},
+        {"speaker": "marina", "voice": "nanami", "text": "别怕，我不会伤你"}
+      ]
+    },
+    {
+      "shot": 2,
+      "duration_sec": 75,
+      "portrait_switch": "mar_normal",
+      "portrait_switch_after": "mar_smile",
+      "cg": "H-MA-001_cg2",
+      "lines": [
+        {"speaker": "marina", "voice": "nanami", "text": "你身上……有海的味道"},
+        {"speaker": "marina", "voice": "nanami", "text": "像潮水一样……干净"},
+        {"speaker": "marina", "voice": "nanami", "text": "……但又被什么污染了"},
+        {"speaker": "marina", "voice": "nanami", "text": "让我来，帮你洗一洗"},
+        {"speaker": "marina", "voice": "nanami", "text": "嗯……这样"}
+      ]
+    },
+    {
+      "shot": 3,
+      "duration_sec": 80,
+      "portrait_switch": "mar_shy",
+      "cg": "H-MA-001_cg3",
+      "lines": [
+        {"speaker": "marina", "voice": "nanami", "text": "……别动"},
+        {"speaker": "marina", "voice": "nanami", "text": "你的血……热得厉害"},
+        {"speaker": "marina", "voice": "nanami", "text": "人鱼的血液……是冷的"},
+        {"speaker": "marina", "voice": "nanami", "text": "冷热相融……舒服吗？"},
+        {"speaker": "marina", "voice": "nanami", "text": "……嗯"},
+        {"speaker": "marina", "voice": "nanami", "text": "别挣扎……越挣扎，海水越甜"}
+      ]
+    },
+    {
+      "shot": 4,
+      "duration_sec": 65,
+      "portrait_switch": "mar_smile",
+      "portrait_switch_after": "mar_cry",
+      "skippable_shot": 4,
+      "lines": [
+        {"speaker": "marina", "voice": "nanami", "text": "……再见"},
+        {"speaker": "marina", "voice": "nanami", "text": "下次……你会回来找我的"},
+        {"speaker": "marina", "voice": "nanami", "text": "我会在海边等……等你"}
+      ]
+    }
+  ],
+  "settlement": {
+    "heroines": {"marina": {"contract": 25, "affection": 15}},
+    "corruption": 15,
+    "stats": {"agility": 3, "water_resist": 1},
+    "items": ["pearl_x1"],
+    "note": "agi 基础 25（非 20），+3 后 28 未越界，R-029 已关闭"
+  },
+  "unlock": ["marina"],
+  "android_fallback": {
+    "keep_cg": 3,
+    "keep_dialog": 18,
+    "disable_water_effect": true,
+    "static_poster_only": true
+  }
+}

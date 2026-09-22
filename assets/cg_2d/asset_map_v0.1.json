@@ -1,0 +1,134 @@
+{
+  "asset_map_version": "0.1",
+  "maintainer": "赵画",
+  "date": "2024-11-16",
+  "note": "D4 机动产出：TC-GALLERY/TC-3D 挂接输入。仅登记已验收入廊 CG（红线）。18 张构成 = V1.1 5 + Sprint8 8 + Sprint9 5。已确认 9 张精确 ID 入表；剩余 9 张（V1.1 5 + S8 Indie 4）文档未列全精确 CG ID，槽位映射以王码 gallery 挂接配置为准，ACL 字段标记 TBD。",
+  "entries": [
+    {
+      "gallery_slot": "TBD_S9-01",
+      "ending_id": "E-ART-A",
+      "event_id": "S9 支线A",
+      "src_png": "CG-EX-01.png",
+      "webp_path": "assets/cg_2d/artesia/CG-EX-01.webp",
+      "char_dir": "artesia",
+      "thumb": "assets/cg_2d/artesia/CG-EX-01.webp",
+      "vendor": "CielArt",
+      "status": "ACCEPTED_VERIFIED"
+    },
+    {
+      "gallery_slot": "TBD_S9-02",
+      "ending_id": "E-MEI-B",
+      "event_id": "S9 支线B",
+      "src_png": "CG-EX-02.png",
+      "webp_path": "assets/cg_2d/mei/CG-EX-02.webp",
+      "char_dir": "mei",
+      "thumb": "assets/cg_2d/mei/CG-EX-02.webp",
+      "vendor": "CielArt",
+      "status": "ACCEPTED_VERIFIED"
+    },
+    {
+      "gallery_slot": "TBD_S9-03",
+      "ending_id": "E-RU-C",
+      "event_id": "S9 支线C",
+      "src_png": "CG-EX-03.png",
+      "webp_path": "assets/cg_2d/rushena/CG-EX-03.webp",
+      "char_dir": "rushena",
+      "thumb": "assets/cg_2d/rushena/CG-EX-03.webp",
+      "vendor": "CielArt",
+      "status": "ACCEPTED_VERIFIED"
+    },
+    {
+      "gallery_slot": "TBD_S9-04",
+      "ending_id": "E-MEI-B",
+      "event_id": "S9 支线B 追加",
+      "src_png": "CG-EX-04.png",
+      "webp_path": "assets/cg_2d/mei/CG-EX-04.webp",
+      "char_dir": "mei",
+      "thumb": "assets/cg_2d/mei/CG-EX-04.webp",
+      "vendor": "Indie-H-Comics",
+      "status": "ACCEPTED_VERIFIED"
+    },
+    {
+      "gallery_slot": "TBD_S9-05",
+      "ending_id": "E-RU-C",
+      "event_id": "S9 支线C 追加",
+      "src_png": "CG-EX-05.png",
+      "webp_path": "assets/cg_2d/rushena/CG-EX-05.webp",
+      "char_dir": "rushena",
+      "thumb": "assets/cg_2d/rushena/CG-EX-05.webp",
+      "vendor": "Indie-H-Comics",
+      "status": "ACCEPTED_VERIFIED"
+    },
+    {
+      "gallery_slot": "TBD_S8-01",
+      "ending_id": "E5 前庭",
+      "event_id": "第五章 CH5 前庭",
+      "src_png": "CG-CH5-01.png",
+      "webp_path": "assets/cg_2d/meido/CG-CH5-01.webp",
+      "char_dir": "meido",
+      "thumb": "assets/cg_2d/meido/CG-CH5-01.webp",
+      "vendor": "CielArt",
+      "status": "ACCEPTED_VERIFIED"
+    },
+    {
+      "gallery_slot": "TBD_S8-02",
+      "ending_id": "E5 王座对峙",
+      "event_id": "第五章 CH5 王座",
+      "src_png": "CG-CH5-02.png",
+      "webp_path": "assets/cg_2d/meido/CG-CH5-02.webp",
+      "char_dir": "meido",
+      "thumb": "assets/cg_2d/meido/CG-CH5-02.webp",
+      "vendor": "CielArt",
+      "status": "ACCEPTED_VERIFIED"
+    },
+    {
+      "gallery_slot": "TBD_S8-03",
+      "ending_id": "E5-1",
+      "event_id": "魔王加冕",
+      "src_png": "CG-CH5-03.png",
+      "webp_path": "assets/cg_2d/meido/CG-CH5-03.webp",
+      "char_dir": "meido",
+      "thumb": "assets/cg_2d/meido/CG-CH5-03.webp",
+      "vendor": "CielArt",
+      "status": "ACCEPTED_VERIFIED"
+    },
+    {
+      "gallery_slot": "TBD_S8-04",
+      "ending_id": "E5-5",
+      "event_id": "混沌真结局",
+      "src_png": "CG-CH5-04.png",
+      "webp_path": "assets/cg_2d/meido/CG-CH5-04.webp",
+      "char_dir": "meido",
+      "thumb": "assets/cg_2d/meido/CG-CH5-04.webp",
+      "vendor": "CielArt",
+      "status": "ACCEPTED_VERIFIED"
+    },
+    {
+      "gallery_slot": "TBD_S7-01..05",
+      "ending_id": "V1.1 结局画廊 5 张",
+      "event_id": "S7 结局画廊（CielArt 3 + Indie 2）",
+      "src_png": "CG-S7-XX（文档未列全精确 ID）",
+      "webp_path": "TBD_需王码 gallery 配置导出",
+      "char_dir": "TBD",
+      "thumb": "TBD",
+      "vendor": "CielArt+Indie",
+      "status": "ACCEPTED_VISUAL_ONLY_需补文件ID"
+    },
+    {
+      "gallery_slot": "TBD_S8-05..08",
+      "ending_id": "S8 Indie 4 张",
+      "event_id": "Sprint8 Indie-H-Comics 尾包 4 张",
+      "src_png": "CG-S8I-XX（文档未列全精确 ID）",
+      "webp_path": "TBD_需王码 gallery 配置导出",
+      "char_dir": "TBD",
+      "thumb": "TBD",
+      "vendor": "Indie-H-Comics",
+      "status": "ACCEPTED_VISUAL_ONLY_需补文件ID"
+    }
+  ],
+  "gaps": [
+    "V1.1 5 张 + S8 Indie 4 张：验收记录确认已入廊，但精确 CG 文件名/槽位在仓库文档未列全——需王码从 gallery 挂接配置（GalleryConfig）导出槽位→事件→文件三列合表",
+    "assets/cg_2d 实物不在当前工作区：CG 二进制应走 Git LFS，CI 断言文件存在需 build.yml 增加 git lfs fetch 步骤，否则 TC-GALLERY 必假绿",
+    "本表 webp_path 为按命名规范推导值，待 LFS 实物同步后逐条校验实际存在 + WebP 头 + 体积 <1.2MB"
+  ]
+}

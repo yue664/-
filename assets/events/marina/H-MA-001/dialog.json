@@ -1,0 +1,151 @@
+{
+  "event_id": "H-MA-001",
+  "title": "深海之吻",
+  "tier": "T0",
+  "chapter": "第 2 章 · 潮汐初动",
+  "char_id": "marina",
+  "duration_hint_ms": 52000,
+  "requires": {
+    "contract_min": 0,
+    "affection_min": 50,
+    "corruption_min": 10
+  },
+  "effect": {
+    "contract_delta": 25,
+    "corruption_delta": 10,
+    "flags": ["seen_marina_first", "mar_contract_signed"]
+  },
+  "skip_allowed": false,
+  "android_safe": false,
+
+  "scenes": [
+    {
+      "scene_id": 1,
+      "location": "海岸礁石 · 月光下",
+      "time_of_day": "深夜",
+      "camera_steam": "3D 内景，海雾弥漫，礁石湿润反光；Marina 从水下缓缓浮出，仅露出上半身，鱼尾在水下闪银光",
+      "cg_android": "H-MA-001_01.png",
+      "bgm": "assets/audio/bgm/theme_ocean_deep.ogg",
+      "dialog": [
+        {"speaker": "旁白", "text": "潮声在礁石边碎成泡沫。月光落在浪尖，也落在她的肩头。"},
+        {"speaker": "Marina", "expression": "neutral", "text": "……终于来了。我等了你好久，勇者大人。"},
+        {"speaker": "凯尔", "expression": "surprised", "text": "……你、你在水下？"},
+        {"speaker": "Marina", "expression": "smile", "text": "我是海的女儿。潮汐认得我，深海认得我，而……你现在也认得我了。"},
+        {"speaker": "旁白", "text": "她笑的时候，礁石上的海雾散了一层。"},
+        {"speaker": "Marina", "expression": "blush", "text": "……如果你愿意，我想请你……到海底来一趟。"}
+      ]
+    },
+    {
+      "scene_id": 2,
+      "location": "海底珊瑚洞（水下场景）",
+      "time_of_day": "深夜",
+      "camera_steam": "3D 内景：海底光柱从水面斜射下来，Marina 拉着主角的手潜下，主角呼吸在水中（契约前需 Marina 给予水息）",
+      "cg_android": "H-MA-001_02.png",
+      "bgm": "assets/audio/bgm/theme_ocean_deep.ogg",
+      "dialog": [
+        {"speaker": "Marina", "expression": "pleasure", "text": "……别怕。我给你一口我的呼吸。"},
+        {"speaker": "凯尔", "expression": "surprised", "text": "……这、这是……"},
+        {"speaker": "旁白", "text": "一缕水色的气息贴上舌尖，主角在水下呼吸起来，鱼尾在远处闪。"},
+        {"speaker": "Marina", "expression": "smile", "text": "……契约还没签，但我愿意先……信你一次。"},
+        {"speaker": "Marina", "expression": "blush", "text": "……走吧。深海之契，就在珊瑚洞里等着。"}
+      ]
+    },
+    {
+      "scene_id": 3,
+      "location": "海底珊瑚洞（核心契约场景）",
+      "time_of_day": "深夜",
+      "camera_steam": "3D 特写：Marina 触手般的海藻缠绕主角手腕，蓝光契约金文在水中浮现",
+      "cg_android": "H-MA-001_03.png",
+      "bgm": "assets/audio/bgm/theme_contract_deep.ogg",
+      "dialog": [
+        {"speaker": "Marina", "expression": "pleasure", "text": "……勇者，签下契约吧。从此你的潮汐，就是我。"},
+        {"speaker": "凯尔", "expression": "surprised", "text": "……深海之契，会带走什么？"},
+        {"speaker": "Marina", "expression": "blush", "text": "……带走你的心跳。它会跟着我，永远在海底。"},
+        {"speaker": "Marina", "expression": "mouth_open", "text": "……签吧。我想感受你的心跳。"},
+        {"speaker": "系统", "text": "【选项 1】签下契约（契约度+25，堕落值+10）", "choice": 1},
+        {"speaker": "系统", "text": "【选项 2】犹豫一下（好感度+5，本事件延后）", "choice": 2},
+        {"speaker": "系统", "text": "【选项 3】拒绝（好感度-10，本事件永久关闭）", "choice": 3}
+      ]
+    },
+    {
+      "scene_id": 4,
+      "location": "海底珊瑚洞 · 契约成立后",
+      "time_of_day": "深夜（水底无昼夜）",
+      "camera_steam": "3D 演出：契约金光随洋流散开，Marina 依偎在主角胸口，鱼尾轻摆",
+      "cg_android": "H-MA-001_04.png",
+      "bgm": "assets/audio/bgm/theme_ocean_aftermath.ogg",
+      "dialog": [
+        {"speaker": "Marina", "expression": "pleasure", "text": "……感受到了。你心跳，跟我的一样快了。"},
+        {"speaker": "旁白", "text": "契约的金文随洋流散开，像一群发光的水母。"},
+        {"speaker": "Marina", "expression": "sigh_blush", "text": "……从今夜起，深海就是我的了。你也是。"},
+        {"speaker": "系统", "choice_result": 1, "text": "【契约度 +25 → 25｜堕落值 +10 → 10】"},
+        {"speaker": "系统", "choice_result": 2, "text": "（事件延后，好感度+5）"},
+        {"speaker": "系统", "choice_result": 3, "text": "（事件关闭，好感度-10，本分支永久不可触发）"},
+        {"speaker": "系统", "text": "【H-MA-001 完成｜解锁 H-MA-002/003/004】"},
+        {"speaker": "系统", "text": "【主线分支：Marina 深渊契约线开启】"}
+      ]
+    },
+    {
+      "scene_id": 5,
+      "location": "海岸礁石 · 浮回海面",
+      "time_of_day": "深夜（微光将曙）",
+      "camera_steam": "3D 演出：主角被 Marina 托着浮出水面，海水从披风滴落；Marina 半潜半出，胸口蓝光契约金文透过皮肤隐约可见；海面无风，浪声静默",
+      "cg_android": "H-MA-001_05.png",
+      "bgm": "assets/audio/bgm/theme_ocean_aftermath.ogg",
+      "dialog": [
+        {"speaker": "Marina", "expression": "sigh_blush", "text": "……呼……终于到海面了。"},
+        {"speaker": "旁白", "text": "海水从披风尖滴落，砸在礁石上，像一串碎光。主角胸口，蓝光契约金文正透过皮肤脉动。"},
+        {"speaker": "凯尔", "expression": "surprised", "text": "……我的胸口……这是什么？"},
+        {"speaker": "Marina", "expression": "smile", "text": "……深海之印。它跟着我，也带着你。"},
+        {"speaker": "Marina", "expression": "blush", "text": "……从此你走进任何海里，都会感到我。"},
+        {"speaker": "系统", "text": "【H-MA-001 收尾完成｜flag: mar_seen_surface=true】"}
+      ]
+    }
+  ],
+
+  "choices": {
+    "1": {
+      "label": "签下契约",
+      "contract_delta": 25,
+      "affection_delta": 0,
+      "corruption_delta": 10,
+      "unlocks": ["H-MA-002", "H-MA-003", "H-MA-004"],
+      "flag": "mar_contract_signed"
+    },
+    "2": {
+      "label": "犹豫一下",
+      "contract_delta": 0,
+      "affection_delta": 5,
+      "corruption_delta": 0,
+      "unlocks": [],
+      "flag": "mar_contract_delayed"
+    },
+    "3": {
+      "label": "拒绝",
+      "contract_delta": 0,
+      "affection_delta": -10,
+      "corruption_delta": 0,
+      "unlocks": [],
+      "flag": "mar_contract_rejected",
+      "permanent_close": true
+    }
+  },
+
+  "voice": {
+    "Marina": "zh-CN-XiaoyiNeural",
+    "凯尔": "zh-CN-YunjianNeural",
+    "bgm": [
+      "assets/audio/bgm/theme_ocean_deep.ogg",
+      "assets/audio/bgm/theme_contract_deep.ogg",
+      "assets/audio/bgm/theme_ocean_aftermath.ogg"
+    ],
+    "se": "assets/events/marina/H-MA-001/audio/se/"
+  },
+
+  "tts_defaults": {
+    "Marina_blush": {"pitch": "+2Hz", "rate": "-10%", "volume": "-15%"},
+    "Marina_pleasure": {"pitch": "+4Hz", "rate": "-20%", "volume": "+10%"},
+    "Marina_mouth_open": {"pitch": "+4Hz", "rate": "-20%", "volume": "+5%"},
+    "凯尔_surprised": {"pitch": "+3Hz", "rate": "+15%", "volume": "+10%"}
+  }
+}

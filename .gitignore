@@ -1,0 +1,33 @@
+# Build artifacts
+game/build/
+build/
+*.exe
+*.apk
+*.pck
+*.zip
+
+# Godot 编辑器缓存
+.godot/
+*.tmp
+*.import
+
+# 本地 keystore（release 密钥不入 Git，走 CI secrets）
+*.keystore
+*.jks
+keystore.properties
+
+# 平台专属
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.user
+
+# 测试报告中间产物
+testing/reports/
+
+# 第三方素材（版权敏感）
+assets/third_party/
+# 测试运行产物（分片 JSON/聚合结果）
+out/
+.backup/

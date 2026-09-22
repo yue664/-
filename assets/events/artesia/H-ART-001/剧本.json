@@ -1,0 +1,86 @@
+# H-ART-001 剧本 JSON（S1-02 演示用）
+# Sprint 1 D4（李游）
+
+{
+  "event_id": "H-ART-001",
+  "name": "契约女仆",
+  "version": "v0.3",
+  "trigger": {
+    "contract_artesia": 20,
+    "chapter": 1,
+    "prereq": []
+  },
+  "shots": [
+    {
+      "index": 1,
+      "title": "初次契约",
+      "cg": "cg_H-ART-001_01.png",
+      "portraits": {"left": "art_normal", "right": ""},
+      "lines": [
+        {"speaker": "Artesia", "text": "主人……终于，可以签下契约了吗？", "audio": "audio/artesia/H-ART-001/001.mp3"},
+        {"speaker": "Artesia", "text": "我是你的女仆，Artesia……请、请您多多指教", "audio": "audio/artesia/H-ART-001/002.mp3"},
+        {"speaker": "Artesia", "text": "（心跳……好乱）", "audio": "audio/artesia/H-ART-001/003.mp3", "portrait_switch": "art_shy"},
+        {"speaker": "Artesia", "text": "签下它，我就会永远属于您……", "audio": "audio/artesia/H-ART-001/004.mp3"},
+        {"speaker": "Artesia", "text": "……啊，抱歉，太冒失了", "audio": "audio/artesia/H-ART-001/005.mp3"}
+      ]
+    },
+    {
+      "index": 2,
+      "title": "契约仪式",
+      "cg": "cg_H-ART-001_02.png",
+      "portraits": {"left": "art_shy", "right": ""},
+      "lines": [
+        {"speaker": "Artesia", "text": "光纹，显现了……", "audio": "audio/artesia/H-ART-001/006.mp3"},
+        {"speaker": "Artesia", "text": "这就是……契约的证明", "audio": "audio/artesia/H-ART-001/007.mp3"},
+        {"speaker": "Artesia", "text": "从此刻起，主人就是我最重要的人", "audio": "audio/artesia/H-ART-001/008.mp3", "portrait_switch": "art_smile"},
+        {"speaker": "Artesia", "text": "无论……无论您需要什么，我都会做到", "audio": "audio/artesia/H-ART-001/009.mp3"},
+        {"speaker": "Artesia", "text": "……可以吗？", "audio": "audio/artesia/H-ART-001/010.mp3"}
+      ]
+    },
+    {
+      "index": 3,
+      "title": "契约确认",
+      "cg": "cg_H-ART-001_03.png",
+      "portraits": {"left": "art_smile", "right": ""},
+      "lines": [
+        {"speaker": "Artesia", "text": "契约，完成", "audio": "audio/artesia/H-ART-001/011.mp3"},
+        {"speaker": "Artesia", "text": "力量会流入您的身体，主人", "audio": "audio/artesia/H-ART-001/012.mp3"},
+        {"speaker": "Artesia", "text": "……啊，请，请等等", "audio": "audio/artesia/H-ART-001/013.mp3"},
+        {"speaker": "Artesia", "text": "这感觉……有点害羞", "audio": "audio/artesia/H-ART-001/014.mp3"}
+      ]
+    },
+    {
+      "index": 4,
+      "title": "事后",
+      "cg": "cg_H-ART-001_04.png",
+      "portraits": {"left": "art_shy", "right": ""},
+      "lines": [
+        {"speaker": "Artesia", "text": "茶……请慢用", "audio": "audio/artesia/H-ART-001/015.mp3"},
+        {"speaker": "Artesia", "text": "今天……主人辛苦了", "audio": "audio/artesia/H-ART-001/016.mp3"},
+        {"speaker": "Artesia", "text": "以后，请让我为您……做更多事情", "audio": "audio/artesia/H-ART-001/017.mp3"},
+        {"speaker": "Artesia", "text": "哪怕……哪怕是这样", "audio": "audio/artesia/H-ART-001/018.mp3"},
+        {"speaker": "Artesia", "text": "……您不觉得我很笨吗？", "audio": "audio/artesia/H-ART-001/019.mp3"}
+      ]
+    },
+    {
+      "index": 5,
+      "title": "契约印记",
+      "cg": "cg_H-ART-001_05.png",
+      "portraits": {},
+      "skippable": true,
+      "lines": []
+    }
+  ],
+  "settlement": {
+    "contract_artesia": 15,
+    "fall_value": 10,
+    "strength": 3,
+    "unlock_heroine": "artesia",
+    "items": ["契约书"]
+  },
+  "android_fallback": {
+    "keep_cg": [1, 2, 3, 4, 5],
+    "no_3d": true,
+    "skippable_shot": 5
+  }
+}
