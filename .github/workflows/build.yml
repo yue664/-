@@ -10,6 +10,8 @@ on:
     paths:
       - 'game/**'
       - 'assets/**'
+      - '.github/workflows/**'
+      - '.github/workflows/**'
   pull_request:
     branches: [ main ]
   workflow_dispatch:
@@ -38,7 +40,7 @@ jobs:
           fi
       - name: Download Godot 4.3 headless
         run: |
-          curl -o godot.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+          curl -L -o godot.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
           unzip godot.zip
           chmod +x Godot_v4.3-stable_linux.x86_64
       - name: Run unit tests (group ${{ matrix.group }} shard ${{ matrix.shard }})
@@ -109,7 +111,7 @@ jobs:
         run: git lfs pull
       - name: Download Godot 4.3 Windows headless
         run: |
-          curl -o godot.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_win64.zip
+          curl -L -o godot.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_win64.zip
           tar -xf godot.zip
           Move-Item Godot_v4.3-stable_win64.exe godot.exe
       - name: Export Windows
@@ -134,13 +136,13 @@ jobs:
           distribution: 'temurin'
       - name: Download Godot 4.3 Linux headless
         run: |
-          curl -o godot.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+          curl -L -o godot.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
           unzip godot.zip
           chmod +x Godot_v4.3-stable_linux.x86_64
       - name: Download Android export templates
         run: |
           mkdir -p ~/.local/share/godot/export_templates/4.3.stable
-          curl -o templates.zip https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_export_templates.tpz
+          curl -L -o templates.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
           unzip templates.zip -d ~/.local/share/godot/export_templates/4.3.stable
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
@@ -166,13 +168,13 @@ jobs:
         run: git lfs pull
       - name: Download Godot 4.3 Linux headless
         run: |
-          curl -o godot.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
+          curl -L -o godot.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip
           unzip godot.zip
           chmod +x Godot_v4.3-stable_linux.x86_64
       - name: Download Web export templates
         run: |
           mkdir -p ~/.local/share/godot/export_templates/4.3.stable
-          curl -o templates.zip https://downloads.tuxfamily.org/godotengine/4.3/Godot_v4.3-stable_export_templates.tpz
+          curl -L -o templates.zip https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_export_templates.tpz
           unzip templates.zip -d ~/.local/share/godot/export_templates/4.3.stable
       - name: Export Web
         run: ./Godot_v4.3-stable_linux.x86_64 --headless --path game --export-release "Web" "game/build/web/index.html"
