@@ -49,7 +49,9 @@ GODOT_BIN = os.environ.get("GODOT_BIN", "godot")
 
 # 执行体 -> 命令构造器（返回 argv 列表）
 EXEC_BUILDERS = {
-    "gd": lambda spec: [GODOT_BIN, "--headless", "--script", f"res://tests/{spec}.gd"],
+    # 注：run_cmd 用 cwd=ROOT 执行，--path 必须指向 game/ 否则 res:// 指向仓库根，
+    # res://tests/*.gd 找不到脚本（与 smoke/benchmark 保持一致）
+    "gd": lambda spec: [GODOT_BIN, "--headless", "--path", "game", "--script", f"res://tests/{spec}.gd"],
     "smoke": lambda _: [GODOT_BIN, "--headless", "--path", "game", "--run-tests", "--quit"],
     "manifest_check": lambda _: [sys.executable, "tools/check_manifest.py"],
     "file_check": lambda spec: [sys.executable, "tools/check_files.py", spec],

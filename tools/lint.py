@@ -69,10 +69,20 @@ def check_i18n_files() -> tuple:
 
 def main() -> int:
     i18n_files, i18n_fail = check_i18n_files()
-    gd_files, gd_fail = check_gd_files()
-    failures = i18n_fail + gd_fail
+    # 不做 .gd 退化扫描：RULES 与 GDScript 语法结构性冲突，逐行扫源码必产生全量假阳。
+    # 实测基线 15 个 .gd 文件 → 1409 条违规，每条源码行至少中一条：
+    #   LINT-005 禁 Tab —— 但 GDScript 强制 Tab 缩进（enum/body 内一律 Tab）
+    #   LINT-002 逐行查大括号成对 —— 但 enum Platform { / dict 跨多行，单行必然不成对
+    #   LINT-006 无连续空格 —— 但 `true   # 注释` 对齐写法必然命中
+    # 这是文案 lint 误扫源码，非源码质量问题。.gd 静态检查应交 godot --check-only。
+    failures = i18n_fail
     ok = not failures
-    print(f"[lint] i18n {i18n_files} 文件 + gd {gd_files} 文件 | "
+    if i18n_files == 0:
+        # 明确区分「无输入」与「已验证全绿」，避免看日志者误判
+        print("[lint] assets/i18n/ 未就位（0 词条文件）→ 无输入可查，跳过；"
+              "这不是「已验证全绿」，词条到位后本项需重跑")
+        return 0
+    print(f"[lint] i18n {i18n_files} 文件 | "
           f"{'✅ 全绿' if ok else '❌ ' + str(len(failures)) + ' 条违规'}")
     for f in failures[:10]:
         print(f"  ❌ {f}")

@@ -28,6 +28,10 @@ testing/reports/
 
 # 第三方素材（版权敏感）
 assets/third_party/
+# Python 字节码缓存（本地 py_compile / 工具执行产生，不入 Git）
+__pycache__/
+*.py[cod]
+
 # 测试运行产物（分片 JSON/聚合结果）
 out/
 .backup/
