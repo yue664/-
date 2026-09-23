@@ -79,12 +79,13 @@
 
 ---
 
-## 风险联动（应对中 6 条，累计关闭 30 条）
+## 风险联动（应对中 7 条，累计关闭 30 条）
 
 - R-047：~~首日 Steam 评价监控~~ → **D2 关闭（2024-11-14，张策审批，首日 92% 达标 + 24h 看板无异常）**
-- R-048：Sentry 消耗预警（王码 D2 起监控，>2,500 触发上报）
-- R-049：Android 下载成功率跌破 98%（王码 D2 起监控 CDN 节点）
-- R-050：自动化脚本化延期（王码 D4 前框架雏形，D5 前回退）
+- R-048：Sentry 消耗预警（王码 D2 起监控，>2,500 触发上报；D4 CI 修复期间未触发）
+- R-049：Android 下载成功率跌破 98%（王码 D2 起监控 CDN 节点；D4 CI 修复期间未触发）
+- R-050：自动化脚本化延期（王码 D4 前框架雏形，D5 前回退；已收官）
+- **R-051（2026-09-23 周野 LFS 实测修正）**：原假设"CG 供应商 LFS 未 push"部分证伪——`git lfs pull` 后 CG 真体到位 **9/18**（1.04-1.11MB 全非指针），非供应商违约；**工具链 3 bug（curl 无 -L / 旧域名 404 / matrix.shard 含 /）已全部闭环**（run 35831741177 验证 9 job 正常、Upload 不再红、P3 shard 1of2 完整绿），剩余纯内容缺口：CG 供应商 S7 5 张 LFS 未 push + GalleryConfig 剩余 4 张终值化（赵画+王码对账），CI 全红转内容缺口（P0/P1 test 脚本 + TC-GALLERY --strict）
 
 ---
 
@@ -100,3 +101,4 @@
 - 2024-11-16：D4 补充②（张策）——**CG 资产全链核实收官**：赵画 D4 机动产出 asset_map_v0.1.json + 交接单 v0.1（18 张 = 9 已定 + 9 TBD）；**李游修正**——S8 Indie 4 张非 TBD（需求文档-V1.2.md 3.1 锁定 CG-CH5-05~08），真 TBD 仅剩 S7 5 张，并钉 LFS 非指针校验坑（fetch 后体积 >1KB 排除 96 字节指针文件）；**王码工程实锤**——GalleryConfig 本地工作区 0 实体（game 目录 grep `gallery|Gallery|画廊|ending_id|gallery_slot` 无命中、无 .gitattributes、Main.tscn 仅 162 字节骨架镜像），D5 三列合表导出必须**线上下拉**，本地无源；**赵画拍板 CG-CH5-08 char_dir = meido**；**陈验 QA 闭环**——TC-GALLERY-001~020 断言规格落盘（测试用例.md v0.2，107→127 条，四连断言：存在/非空/WebP 头 RIFF/体积 <1.2MB）+ 已知问题列表补登 KN-017（GalleryConfig 本地无源，王码+张策）/ KN-018（build.yml 缺 LFS fetch+非指针校验，王码）+ KN-015/016 回填。**D5 显式待办（张策拍板）**：① 王码 build.yml 先行加 LFS fetch+非指针校验（不依赖外部输入，D4 已可动）② 王码 D5 线上下拉 GalleryConfig 导出三列合表 ③ 9 张槽位终值化（去 TBD_ 前缀）+ S8-05..08 拆 4 条独立 entry（CG-CH5-05~08）+ S7 5 张补全 ④ 赵画 asset_map v0.2 复核 ⑤ 陈验 TC-GALLERY 20 条全绿才收口，红一条 D5 不收口；**张策责任项**：确认线上仓库可拉取（KN-017 高严重度，D5 前钉死）
 - 2024-11-19：D5 实况同步（张策）——**王码 B 类挂接输入全落盘**（三列合表 v0.1 18 张槽位终值化 + 映射表 v0.2 A+B ~236 目标 ≥90% + check_gallery.py v0.1 四连断言 + tc_manifest.json v0.1 清单驱动）；**陈验 TC-GALLERY 验收前置复核通过**（文档层 18 张全对齐 + 断言 5 分支无假绿 + strict 门禁红线）；**风险表脏数据清理完成**（11-13 行恢复 + 简版 11-16 删除 + 粘连残片清除）；**剩余硬线**：A 类 180 条挂接 runner 清单驱动 + CI 全绿（LFS 实物 18 张四连 --strict）+ 15min 对账；达标 ≥90% 收官否则 R-050 回退；预算 0 支出
 - **2024-11-19 新组补充（周野核查）**：build.yml CI 触发条件核查——on.push.paths 仅 game/** + assets/**，**当前基线 150 文件不含 LFS 真体（game/ 仅 15 GDScript 骨架、assets/ 仅台账 JSON）→ 推送基线不会触发 CI**（paths 过滤后 0 触发）。CI 激活前提 = 认证 + 18 张 CG 真体进 assets/。此事实已钉入，避免误判"push 完即全绿"。
+- 2026-09-23：D4 CI 工具链 5 项修复收官（周野主程）——**CI 5 轮红转绿收官**：第 5 轮 run 35831741177 验证通过（workflow 9 job 正常注册 + Upload shard results 不再红 + P3 shard 1of2 完整 success），3 个工具 bug 全部闭环。**5 项交付**：① 6 处 `curl -L`（download-godot / download-lint / build-android / build-web / build-windows×2，curl 默认不跟随 302，GitHub release CDN 返回 302 导致 0KB 空 zip）② 2 处旧域名 404 切新（godot tuxfamily.org→GitHub Releases 4.3-stable、GDScriptLint master→v0.3.4）③ paths 白名单补 `tools/**`+`.github/workflows/**`（ffc67b9 修改 tools/test_runner.py 因未匹配 paths 被 CI 静默跳过 8h）④ `gd` 执行体补 `--path game`（res:// 指向 game/ 目录，暴露真实脚本缺失而非 file not found 假红）⑤ **matrix.shard 改 `1of2/2of2` 无斜杠写法**（bash `${SHARD%%of*}/${SHARD##*of}` 拆回 `1/2` 传 test_runner，with: 直接展开无斜杠值）；**中间事故**——首次用 `replace(matrix.shard,'/',"of")` 表达式修复，致 run 35810203136 workflow_name 变 null 产出 0 job（with: 是无引号标量，裸单引号与 Actions 表达式扫描冲突，非纯 YAML 问题，js-yaml 能解析但 GitHub Actions 端拒绝），已回退 5aaf77e 恢复 CI 可运行；**R-051 诊断修正**（周野 LFS 实测证伪原假设）——`git lfs pull` 后 CG webp 真体到位 **9/18**（1.04-1.11MB 全非指针），非供应商违约；剩余 9/18 = assets/cg_2d/ 未 push 的 S7 5 张 LFS_PENDING + GalleryConfig 未终值化 4 张；**R-051 拆分**：①工具链根因 ✅ 已闭环（run 35831741177 9 job 正常调度）②CG 内容缺口 ⏳ 赵画对账供应商 S7 5 张 LFS 实物 + GalleryConfig 剩余 4 张终值化 ③P0/P1 测试脚本（王码补 test_ch5_boss.gd / test_ui_state.gd）；**剩余 CI 红全转内容缺口**——P0 `test_ch5_boss.gd` 缺（王码）/ P1 `test_ui_state.gd` 缺（王码）/ P2 asset_3d + TC-GALLERY --strict（赵画对账供应商 LFS）——工具链已跑通，P3 shard 1of2 完整绿证明输入齐备即可全绿；R-048/049/050 监控中未触发，**累计关闭 30 条，应对中 7 条**（R-048/049/050 + R-051 + KN-017 + 内容缺口），预算 0 新增支出
