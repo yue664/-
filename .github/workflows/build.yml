@@ -20,11 +20,22 @@ jobs:
   unit-test:
     name: Unit Test (headless) [${{ matrix.group }} shard ${{ matrix.shard }}]
     runs-on: ubuntu-latest
+    # matrix.shard 用 1of2/2of2 而非 1/2。
+    # 原因：
+    #   ① path: out/P3_1/2.json 会被 Actions 解析成「目录 out/P3_1 + 文件 2.json」，
+    #      但磁盘上是单层路径 out/P3_1/2.json（无 out/P3_1 目录）→ upload 找不到文件
+    #   ② 在 with: 里写 replace(matrix.shard, '/', 'of') 会让 GitHub 端解析失败，
+    #      整个 workflow 失效、产出 0 job（run 35810203136）。with: 是无引号标量，
+    #      里面的裸 ' 与 Actions 表达式扫描冲突。
+    # 解法：matrix 值本身不含 / 和 '，bash 里用 %%of*/##*of 拆回 1/2 给 test_runner。
+    env:
+      GROUP: ${{ matrix.group }}
+      SHARD: ${{ matrix.shard }}
     strategy:
       fail-fast: false
       matrix:
         group: [P0, P1, P2, P3]
-        shard: [1/2, 2/2]
+        shard: [1of2, 2of2]
     steps:
       - uses: actions/checkout@v4
       - name: Git LFS pull (TC-GALLERY 前置，拉取 CG webp 真体)
@@ -46,7 +57,11 @@ jobs:
       - name: Run unit tests (group ${{ matrix.group }} shard ${{ matrix.shard }})
         run: |
           export GODOT_BIN="$PWD/Godot_v4.3-stable_linux.x86_64"
-          python3 tools/test_runner.py --group ${{ matrix.group }} --shard ${{ matrix.shard }} --json "out/${{ matrix.group }}_${{ matrix.shard }}.json"
+          # shard 形如 1of2，拆出 分片号/总数 供 --shard 使用；
+          # SHARD 本身不含 /，可直接当 artifact 名与文件名。
+          export SHARD_ARG="${SHARD%%of*}/${SHARD##*of}"
+          python3 tools/test_runner.py --group "$GROUP" --shard "$SHARD_ARG" --json "out/${GROUP}_${SHARD}.json"
+          echo "::notice::group=$GROUP shard=$SHARD_ARG json=out/${GROUP}_${SHARD}.json"
       - name: Upload shard results
         if: always()
         uses: actions/upload-artifact@v4
