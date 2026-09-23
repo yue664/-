@@ -46,13 +46,18 @@ jobs:
       - name: Run unit tests (group ${{ matrix.group }} shard ${{ matrix.shard }})
         run: |
           export GODOT_BIN="$PWD/Godot_v4.3-stable_linux.x86_64"
-          python3 tools/test_runner.py --group ${{ matrix.group }} --shard ${{ matrix.shard }} --json "out/${{ matrix.group }}_${{ matrix.shard }}.json"
+          # shard 形如 1/2，含 / 不能做文件名/产物名（upload-artifact@v4 名称字符集限制），
+          # 不用 bash 参数替换（${var//}）避免 YAML+shell 双重转义，直接用 Actions replace() 产出合法 slug
+          SHARD_SLUG='${{ replace(matrix.shard, '/', 'of') }}'
+          python3 tools/test_runner.py --group ${{ matrix.group }} --shard ${{ matrix.shard }} --json "out/${{ matrix.group }}_${SHARD_SLUG}.json"
       - name: Upload shard results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: unit-results-${{ matrix.group }}-${{ matrix.shard }}
-          path: out/${{ matrix.group }}_${{ matrix.shard }}.json
+          # name/path 都含 shard 值，必须做同一种替换，否则上传名与路径对不上
+          # with: 块由 Actions 表达式引擎求值（非 bash），只能用 replace()
+          name: unit-results-${{ matrix.group }}-${{ replace(matrix.shard, '/', 'of') }}
+          path: out/${{ matrix.group }}_${{ replace(matrix.shard, '/', 'of') }}.json
 
   gallery-check:
     name: TC-GALLERY (check_gallery --strict)
